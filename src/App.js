@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './components/Dasboard/Dashboard';
+import SideBar from './components/Sidebar/Sidebar';
+import Deudores from './views/Deudores';
+import TablaDeudores from './components/Deudores/TablaDeudores';
+import PageNotFound from './views/PageNotFound';
+import FormDeudores from './components/Deudores/Formulario';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <Routes>
+            <Route path='*' element={PageNotFound}></Route>
+            <Route path="/menu" element={<SideBar/>}>
+              <Route path="/menu/dashboard" element={<Dashboard/>}/>
+              <Route path="/menu/deudores" element={<Deudores/>}>
+                <Route path="/menu/deudores/lista" element={<TablaDeudores/>}></Route>
+                <Route path="/menu/deudores/formulario" element={<FormDeudores/>}></Route>
+              </Route>
+            </Route>
+        </Routes>
+    </BrowserRouter>
   );
 }
 
