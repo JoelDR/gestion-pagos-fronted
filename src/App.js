@@ -10,6 +10,9 @@ import EditarDeudor from './components/Deudores/EditarDeudor';
 import TablaCobradores from './components/Cobradores/TablaCobradores';
 import AgregarCobrador from './components/Cobradores/AgregarCobrador';
 import EditarCobrador from './components/Cobradores/EditarCobrador';
+import TablaPagos from './components/Pagos/TablaPagos';
+import TablaReportes from './components/Reportes/TablaReporte';
+import AgregarPago from './components/Pagos/AgregarPago';
 
 function App() {
   return (
@@ -27,8 +30,15 @@ function App() {
                 <Route exact path="/menu/cobradores/nuevo" element={<AgregarCobrador/>}></Route>
                 <Route exact path="/menu/cobradores/editar/:id" element={<EditarCobrador/>}></Route>
               </Route>
-            </Route>
-            <Route path='*' element={<PageNotFound/>}></Route>
+              <Route exact path="/menu/pagos" element={<Deudores/>}>
+                  <Route exact path="/menu/pagos/lista" element={<TablaPagos/>}></Route>
+                  <Route exact path="/menu/pagos/nuevo" element={<AgregarPago/>}></Route>
+              </Route>
+              <Route exact path="/menu/reportes" element={<Deudores/>}>
+                  <Route exact path="/menu/reportes/lista" element={<TablaReportes/>}></Route>
+              </Route>
+              </Route>
+              <Route path='*' element={<PageNotFound/>}></Route>
         </Routes>
     </BrowserRouter>
   );

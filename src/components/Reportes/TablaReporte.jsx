@@ -3,10 +3,10 @@ import axios from 'axios';
 import {Link } from "react-router-dom";
 import LoaderTable from '../Loader/LoaderTable';
 import Message from '../Loader/Message';
-import FilaPagos from './FilaPagos';
+import FilaReportes from './FilaReporte';
 
-export default function TablaPagos() {
-  const [pagos, setPagos] = useState(null);
+export default function TablaReportes() {
+  const [reportes, setReportes] = useState(null);
   const [search, setSearch ] = useState('');
   const [loader, setLoder] = useState(true);
   const [error, setError] = useState(null);
@@ -16,22 +16,22 @@ export default function TablaPagos() {
     setSearch( target.value );
   }
 
-  const filtrarPagos = () => {
+  const filtrarReportes = () => {
     if (search.length === 0) {
-      return pagos;
+      return reportes;
     }
-    const filtro = pagos.filter(pago => pago.deudor.includes(search));
+    const filtro = reportes.filter(pago => pago.deudor.includes(search));
     return filtro;
   }
 
   useEffect(() => {
     axios.get(APIURL).then(res => {
-      setPagos(res.data.pagos);
+      setReportes(res.data.pagos);
       setError(null);
       setLoder(false);
     })
     .catch(err => {
-      setPagos(null)
+      setReportes(null)
       setError(err)
       setLoder(false);
     });
@@ -42,7 +42,7 @@ export default function TablaPagos() {
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <section className='p-4'>
-            <h2 className='text-xl font-semibold my-3'>Pagos</h2>
+            <h2 className='text-xl font-semibold my-3'>Reportes</h2>
             <div className='flex justify-between'>
               <Link to="/menu/pagos/nuevo" className="text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline mr-1 p-0" viewBox="0 0 20 20" fill="currentColor">
@@ -61,7 +61,7 @@ export default function TablaPagos() {
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             {loader && <LoaderTable/>}
             {error && <Message/>}
-            {pagos && (
+            {reportes && (
               <div className='p-4'>
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
@@ -82,8 +82,8 @@ export default function TablaPagos() {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {
-                      pagos.length > 0 ? 
-                      filtrarPagos().map(pago => (<FilaPagos key={pago._id} data={pago}/>)) :
+                      reportes.length > 0 ? 
+                      filtrarReportes().map(pago => (<FilaReportes key={pago._id} data={pago}/>)) :
                       <tr><td className="px-6 py-4 whitespace-nowrap">No hay datos</td></tr>
                     }
                     
@@ -92,7 +92,7 @@ export default function TablaPagos() {
                 <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>
                   <div className="flex flex-col items-center">
                     <span className="text-sm text-gray-700">
-                        Mostrando <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">5</span> de <span className="font-semibold text-gray-900">{pagos.length}</span> Entradas
+                        Mostrando <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">5</span> de <span className="font-semibold text-gray-900">{reportes.length}</span> Entradas
                     </span>
                     <div className="inline-flex mt-2 xs:mt-0">
                         <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none">
