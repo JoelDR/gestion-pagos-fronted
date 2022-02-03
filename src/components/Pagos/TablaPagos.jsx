@@ -10,7 +10,7 @@ export default function TablaPagos() {
   const [search, setSearch ] = useState('');
   const [loader, setLoder] = useState(true);
   const [error, setError] = useState(null);
-  const APIURL = 'http://localhost:3800/api/pagos';
+  const APIURL = 'http://localhost:3800/api/pagosfull';
 
   const onSearchChange = ({ target }) => {
     setSearch( target.value );
@@ -20,13 +20,13 @@ export default function TablaPagos() {
     if (search.length === 0) {
       return pagos;
     }
-    const filtro = pagos.filter(pago => pago.deudor.includes(search));
+    const filtro = pagos.filter(pago => pago.deudors[0].nombre.includes(search));
     return filtro;
   }
 
   useEffect(() => {
     axios.get(APIURL).then(res => {
-      setPagos(res.data.pagos);
+      setPagos(res.data.pagosfull);
       setError(null);
       setLoder(false);
     })

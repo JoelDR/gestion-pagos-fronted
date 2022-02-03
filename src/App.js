@@ -14,6 +14,7 @@ import TablaPagos from './components/Pagos/TablaPagos';
 import TablaReportes from './components/Reportes/TablaReporte';
 import AgregarPago from './components/Pagos/AgregarPago';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -43,5 +44,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
