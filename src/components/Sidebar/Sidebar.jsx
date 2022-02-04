@@ -1,11 +1,18 @@
 import React from 'react';
 import {Outlet, Link } from "react-router-dom";
+import icono from '../../assets/Logotipoiconomorado.png'
+import './Sidebar.css'
 
 export default function Sidebar() {
   return(
     <div className='grid grid-cols-12 h-screen'>
       <div className='bg-[#313559] col-span-2 flex flex-col content-center'>
-        <h2 className='text-white text-2xl text-center my-6'>Sidebar</h2>
+        <div className='flex justify-start p-10'>
+          <img className='imagen' src={icono} alt="" />
+          <div>
+            <h2 className='text-white text-2xl text-center my-6'><strong>PaguayGo</strong></h2>
+          </div>
+        </div>
         <ul className='flex flex-col justify-center text-center content-center'>
           <Link to="/menu/dashboard" className='py-3 pl-7 hover:bg-rose-400 text-white text-left ml-7 rounded-l-full focus:bg-rose-400'>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline mr-3" viewBox="0 0 20 20" fill="currentColor">
