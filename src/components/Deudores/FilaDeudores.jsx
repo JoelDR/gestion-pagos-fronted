@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 
-export default function FilaCobradores(data) {
+export default function FilaDedudores(data) {
   let { _id, nombre, cedula, telefono, correo } = data.data;
 
   return (

@@ -12,6 +12,9 @@ import AgregarCobrador from './components/Cobradores/AgregarCobrador';
 import EditarCobrador from './components/Cobradores/EditarCobrador';
 import TablaPagos from './components/Pagos/TablaPagos';
 import Login from './views/Login';
+import TablaReportes from './components/Reportes/TablaReporte';
+import AgregarPago from './components/Pagos/AgregarPago';
+
 
 function App() {
   return (
@@ -30,14 +33,16 @@ function App() {
                 <Route exact path="/menu/cobradores/editar/:id" element={<EditarCobrador/>}></Route>
               </Route>
               <Route exact path="/menu/pagos" element={<PageComponents/>}>
-                <Route exact path="/menu/pagos/lista" element={<TablaPagos/>}></Route>
+                  <Route exact path="/menu/pagos/lista" element={<TablaPagos/>}></Route>
+                  <Route exact path="/menu/pagos/nuevo" element={<AgregarPago/>}></Route>
               </Route>
-            </Route>
-            <Route exact path="/" element={<Login/>}></Route>
-            <Route path='*' element={<PageNotFound/>}></Route>
+              <Route exact path="/menu/reportes" element={<PageComponents/>}>
+                  <Route exact path="/menu/reportes/lista" element={<TablaReportes/>}></Route>
+              </Route>
+              </Route>
+              <Route path='*' element={<PageNotFound/>}></Route>
         </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;
