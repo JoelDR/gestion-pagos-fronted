@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import FilaDeudores from "./tableConfig/FilaDeudores";
-import FilaCobradores from "./tableConfig/FilaCobradores";
+import FilaDeudores from "./Config/FilaDeudores";
+import FilaCobradores from "./Config/FilaCobradores";
 import LoaderTable from "../Loader/LoaderTable";
 import Message from "../Loader/Message";
 
