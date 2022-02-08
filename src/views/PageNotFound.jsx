@@ -7,7 +7,7 @@ export default function PageNotFound() {
         <p className='text-indigo-600 font-bold text-lg'>ERROR 404</p>
         <h2 className='text-5xl font-bold mb-3'>Página no encontrada</h2>
         <p className='text-base mb-4'>Perdón no pudimos encontrar la página que desea ver</p>
-        <Link to='/menu' className='text-white text-base py-2 px-3 bg-indigo-600 rounded-lg'>Página principal</Link>
+        <Link to='/' className='text-white text-base py-2 px-3 bg-indigo-600 rounded-lg'>Página principal</Link>
       </div>
     </div>
   );

@@ -92,21 +92,25 @@ export default function TablaDeudores() {
                     
                   </tbody>
                 </table>
-                <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>
-                  <div className="flex flex-col items-center">
-                    <span className="text-sm text-gray-700">
-                        Mostrando <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">5</span> de <span className="font-semibold text-gray-900">{deudores.length}</span> Entradas
-                    </span>
-                    <div className="inline-flex mt-2 xs:mt-0">
-                        <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none">
-                            Anterior
-                        </button>
-                        <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-r border-0 border-l border-gray-700 hover:bg-indigo-700">
-                            Siguiente
-                        </button>
-                    </div>
-                  </div>
-                </nav>
+                {
+                  deudores.length > 10 && (
+                    <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>
+                      <div className="flex flex-col items-center">
+                        <span className="text-sm text-gray-700">
+                            Mostrando <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">5</span> de <span className="font-semibold text-gray-900">{deudores.length}</span> Entradas
+                        </span>
+                        <div className="inline-flex mt-2 xs:mt-0">
+                            <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none">
+                                Anterior
+                            </button>
+                            <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-r border-0 border-l border-gray-700 hover:bg-indigo-700">
+                                Siguiente
+                            </button>
+                        </div>
+                      </div>
+                    </nav>
+                  )
+                }
               </div>
             )}
           </div>

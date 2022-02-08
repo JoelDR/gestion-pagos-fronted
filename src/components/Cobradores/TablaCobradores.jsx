@@ -89,7 +89,6 @@ export default function TablaCobradores() {
                       filtrarcobradores().map(deudor => (<Filacobradores key={deudor._id} data={deudor}/>)) :
                       <tr><td className="px-6 py-4 whitespace-nowrap">No hay datos</td></tr>
                     }
-                    
                   </tbody>
                 </table>
                 <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>

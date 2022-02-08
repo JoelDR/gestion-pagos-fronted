@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function AgregarDeudor() {
   const APIURL = 'http://localhost:3800/api/deudores';
