@@ -4,24 +4,41 @@ import FilaDeudores from './FilaDeudores';
 import LoaderTable from '../Loader/LoaderTable';
 import Message from '../Loader/Message';
 import {Link } from "react-router-dom";
+import Visualziar from './Visualizar';
 
 export default function TablaDeudores() {
   const [deudores, setDeudores] = useState(null);
   const [loader, setLoder] = useState(true);
   const [error, setError] = useState(null);
-  const [search, setSearch ] = useState('');
+  const [currentPage, setCurrentPage] = useState(0)
+  const [search, setSearch] = useState('');
+  const [deudorSelect, setDeudorSelect] = useState(null)
   const APIURL = 'http://localhost:3800/api/deudores';
+  const [stateModal, setStateModal] = useState(true);
 
   const filtrarDeudores = () => {
     if (search.length === 0) {
-      return deudores;
+      return deudores.slice(currentPage, currentPage + 5);
     }
-    const filtro = deudores.filter(deudor => deudor.nombre.includes(search));
-    return filtro;
+    const filtro = deudores.filter(deudor => deudor.nombre.toUpperCase().includes(search.toUpperCase()));
+    return filtro.slice( currentPage, currentPage + 5);
   }
+
+  const nextPage = () => {
+    if (
+      deudores.filter((deudor) => deudor.nombre.toUpperCase().includes(search.toUpperCase())).length >
+      currentPage + 5
+    )
+    setCurrentPage(currentPage + 5);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) setCurrentPage(currentPage - 5);
+  };
 
   const onSearchChange = ({ target }) => {
     setSearch( target.value );
+    setCurrentPage(0);
   }
 
   useEffect(() => {
@@ -86,24 +103,25 @@ export default function TablaDeudores() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {
                       deudores.length > 0 ? 
-                      filtrarDeudores().map(deudor => (<FilaDeudores key={deudor._id} data={deudor}/>)) :
+                      filtrarDeudores().map(deudor => (<FilaDeudores key={deudor._id} data={deudor} setDeudorSelect={setDeudorSelect} setStateModal={setStateModal}/>)) :
                       <tr><td className="px-6 py-4 whitespace-nowrap">No hay datos</td></tr>
                     }
                     
                   </tbody>
                 </table>
                 {
-                  deudores.length > 10 && (
+                  deudores.length > 5 && (
                     <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>
                       <div className="flex flex-col items-center">
-                        <span className="text-sm text-gray-700">
-                            Mostrando <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">5</span> de <span className="font-semibold text-gray-900">{deudores.length}</span> Entradas
-                        </span>
                         <div className="inline-flex mt-2 xs:mt-0">
-                            <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none">
+                            <button 
+                              className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none"
+                              onClick={ prevPage }>
                                 Anterior
                             </button>
-                            <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-r border-0 border-l border-gray-700 hover:bg-indigo-700">
+                            <button 
+                              className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-r border-0 border-l border-gray-700 hover:bg-indigo-700"
+                              onClick={ nextPage }>
                                 Siguiente
                             </button>
                         </div>
@@ -116,6 +134,7 @@ export default function TablaDeudores() {
           </div>
         </div>
       </div>
+      <Visualziar state={stateModal} setState={setStateModal} deudor={deudorSelect}/>
     </div>
   );
 }

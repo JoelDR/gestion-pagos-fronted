@@ -13,9 +13,9 @@ export default function VisualizadorPdf(reporte) {
   }
 
   return (
-    <div>
+    <div className="max-h-screen overflow-y-auto">
       {reporte.reporte._id ?  
-        <div> 
+        <div className=""> 
           <div className="flex justify-end p-3 shadow">
             <button onClick={hundleExportWithComponent} className="text-white bg-gradient-to-r from-rose-300 via-rose-400 to-rose-400 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-3 py-2 text-center">
               Descargar

@@ -1,7 +1,8 @@
 
 .imagen {
-  height: 5rem;
-  margin-right: 1rem;
+  height: 4rem;
+  width: 4rem;
+  margin: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {

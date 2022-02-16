@@ -1,32 +1,90 @@
-import React from 'react';
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Navigate } from "react-router-dom";
+import NavBar from '../components/Home/NavBar';
+import HeroSecion from '../components/Home/HeroSection';
+import SectionModules from "../components/Home/SectionModules";
+import Footer from "../components/Home/Footer";
+
+const features = [
+  {
+    name: 'Módulo de deudores',
+    description:
+      'Agrega y modifica la información de todos tus deudores, podrás ver una información detallada de cada uno.',
+  },
+  {
+    name: 'Módulo de cobradores',
+    description:
+      'Agrega y modifica la información de todos tus cobradores, podrás ver una información detallada de cada uno.',
+  },
+  {
+    name: 'Módulo de pagos',
+    description:
+      'Registra los pagos realizados por los deudores a cada una de los cobradores, filtra la información y previsualizala',
+  },
+  {
+    name: 'Reportes',
+    description:
+      'Genera reportes de los pagos realizados por cada uno de los deudores',
+  },
+]
 
 export default function Login() {
-  return(
-    <section className="w-full h-screen text-gray-900 py-36 bg-center bg-cover bg-no-repeat"
-    style={{backgroundImage: `url('https://images.unsplash.com/photo-1623479322729-28b25c16b011?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=htmlFormat&fit=crop&w=1920&q=1280')`}}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 flex items-center justify-center">
-          <div className="lg:w-3/6 lg:pr-0 pr-0">
-              <h1 className="font-medium text-5xl text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
-              <p className="leading-relaxed mt-4 text-white">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  return (
+    <div className="bg-white w-full">
+      { !isAuthenticated? (
+        <div className="w-full">
+          <NavBar login={loginWithRedirect}/>
+          <HeroSecion/>
+          <div id="beneficios" className="py-12 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="lg:text-center">
+                <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">Beneficios</h2>
+                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                  Mejora la gestión de tus cobranzas
+                </p>
+                <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                  Utiliza nuestro módulos para administrar correctamente tus cobros, registrando tus deudores. Además genera reportes de los cobros realizados.
+                </p>
+              </div>
+
+              <div className="mt-10">
+                <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                  {features.map((feature) => (
+                    <div key={feature.name} className="relative">
+                      <dt>
+                        <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        </div>
+                        <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{feature.name}</p>
+                      </dt>
+                      <dd className="mt-2 ml-16 text-base text-gray-500">{feature.description}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
           </div>
-          <div className="lg:w-3/6 xl:w-2/5 md:w-full bg-gray-50 p-8 flex flex-col lg:ml-auto w-full mt-10 lg:mt-0 rounded-md">
-              <div className="relative mb-4">
-                  <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">Name</label>
-                  <input type="text" id="name" name="name" className="w-full bg-white rounded-md border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 text-sm outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-150 ease-in-out"/>
-              </div>
-              <div className="relative mb-4">
-                  <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-                  <input type="email" id="email" name="email" className="w-full bg-white rounded-md border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 text-sm outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-150 ease-in-out"/>
-              </div>
-              <div className="relative mb-4">
-                  <label htmlFor="email" className="leading-7 text-sm text-gray-600">Phone</label>
-                  <input type="email" id="phone" name="phone" className="w-full bg-white rounded-md border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 text-sm outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-150 ease-in-out"/>
-              </div>
-              <button className="text-white bg-indigo-500 rounded-md border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 text-lg">Submit</button>
-          </div>
-      </div>
-    </section>
+          <SectionModules/>
+          <section id="nosotros" className="bg-white w-full p-12 my-10 divide-y-4 divide-slate-400/25">
+            <div className="w-/34">
+              <h3 className="text-gray-800 font-bold text-3xl text-center">Nosotros</h3>
+              <p className="w-3/4 text-base text-gray-700 my-4 text-center m-auto">Somos una empresa orientada a la gestión de cobranzas, contamos con un sistema de pagos ágil, rápido y seguro brindando al cliente la mayor facilidades para su servicio</p>
+            </div>
+            <div className="w-3/4 m-auto">
+              <img 
+                src="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
+                alt="" 
+                className="rounded-lg"
+              />
+            </div>
+          </section>
+          <Footer/>
+        </div>
+      )
+      : 
+        <Navigate to="/menu/dashboard"></Navigate>
+      }
+    </div>
   );
 }

@@ -4,24 +4,40 @@ import {Link } from "react-router-dom";
 import LoaderTable from '../Loader/LoaderTable';
 import Message from '../Loader/Message';
 import FilaPagos from './FilaPagos';
+import Visualziar from './Visualizar';
 
 export default function TablaPagos() {
   const [pagos, setPagos] = useState(null);
   const [search, setSearch ] = useState('');
   const [loader, setLoder] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pagoSelect, setPagoSelect] = useState(null);
+  const [stateModal, setStateModal] = useState(false);
   const APIURL = 'http://localhost:3800/api/pagosfull';
-
-  const onSearchChange = ({ target }) => {
-    setSearch( target.value );
-  }
 
   const filtrarPagos = () => {
     if (search.length === 0) {
-      return pagos;
+      return pagos.slice(currentPage, currentPage + 5);
     }
-    const filtro = pagos.filter(pago => pago.deudors[0].nombre.includes(search));
-    return filtro;
+    const filtro = pagos.filter(pago => pago.deudors[0].nombre.toUpperCase().includes(search.toUpperCase()) || pago.cobradors[0].nombre.toUpperCase().includes(search));
+    return filtro.slice( currentPage, currentPage + 5);;
+  }
+
+  const nextPage = () => {
+    if (
+      pagos.filter(pago => pago.deudors[0].nombre.toUpperCase().includes(search) || pago.cobradors[0].nombre.toUpperCase().includes(search)).length > currentPage + 5
+    )
+    setCurrentPage(currentPage + 5);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) setCurrentPage(currentPage - 5);
+  };
+
+  const onSearchChange = ({ target }) => {
+    setSearch( target.value );
+    setCurrentPage(0);
   }
 
   useEffect(() => {
@@ -78,37 +94,42 @@ export default function TablaPagos() {
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Fecha
                       </th>
+                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Acciones
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {
                       pagos.length > 0 ? 
-                      filtrarPagos().map(pago => (<FilaPagos key={pago._id} data={pago}/>)) :
+                      filtrarPagos().map(pago => (<FilaPagos key={pago._id} data={pago} setPago={setPagoSelect} setStateModal={setStateModal}/>)) :
                       <tr><td className="px-6 py-4 whitespace-nowrap">No hay datos</td></tr>
                     }
                     
                   </tbody>
                 </table>
-                <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>
-                  <div className="flex flex-col items-center">
-                    <span className="text-sm text-gray-700">
-                        Mostrando <span className="font-semibold text-gray-900">1</span> to <span className="font-semibold text-gray-900">5</span> de <span className="font-semibold text-gray-900">{pagos.length}</span> Entradas
-                    </span>
-                    <div className="inline-flex mt-2 xs:mt-0">
-                        <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none">
-                            Anterior
-                        </button>
-                        <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-r border-0 border-l border-gray-700 hover:bg-indigo-700">
-                            Siguiente
-                        </button>
-                    </div>
-                  </div>
-                </nav>
+                {
+                  pagos.length > 5 && (
+                    <nav aria-label="Page navigation" className='mt-7 flex flex-col items-center'>
+                      <div className="flex flex-col items-center">
+                        <div className="inline-flex mt-2 xs:mt-0">
+                          <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-l hover:bg-indigo-700 focus:outline-none" onClick={prevPage}>
+                              Anterior
+                          </button>
+                          <button className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 rounded-r border-0 border-l border-gray-700 hover:bg-indigo-700" onClick={nextPage}>
+                              Siguiente
+                          </button>
+                        </div>
+                      </div>
+                    </nav>
+                  )
+                }
               </div>
             )}
           </div>
         </div>
       </div>
+      <Visualziar state={stateModal} setState={setStateModal} pago={pagoSelect}/>
     </div>
   );
 }
