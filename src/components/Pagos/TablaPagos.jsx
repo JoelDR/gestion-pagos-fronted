@@ -14,7 +14,7 @@ export default function TablaPagos() {
   const [currentPage, setCurrentPage] = useState(0);
   const [pagoSelect, setPagoSelect] = useState(null);
   const [stateModal, setStateModal] = useState(false);
-  const APIURL = 'http://localhost:3800/api/pagosfull';
+  const APIURL = 'https://paguaygo.herokuapp.com/api/pagosfull';
 
   const filtrarPagos = () => {
     if (search.length === 0) {

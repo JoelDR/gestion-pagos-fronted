@@ -30,7 +30,7 @@ const getDateNow = ()=> {
 
 export default function Dashboard() {
 
-  const APIULR= 'http://localhost:3800/api/pagosfull';
+  const APIULR= 'https://paguaygo.herokuapp.com/api/pagosfull';
   const [todayPayments, setTodayPayments] = useState(null);
   const { user } = useAuth0();
 

@@ -11,7 +11,7 @@ export default function TablaReportes() {
   const [loader, setLoder] = useState(true);
   const [error, setError] = useState(null);
   const [reporte, setReporte] = useState({});
-  const APIURL = 'http://localhost:3800/api/pagosfull';
+  const APIURL = 'https://paguaygo.herokuapp.com/api/pagosfull';
 
   const onSearchChange = ({ target }) => {
     setSearch( target.value );

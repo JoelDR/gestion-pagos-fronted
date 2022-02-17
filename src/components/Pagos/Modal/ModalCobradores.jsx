@@ -11,13 +11,13 @@ export default function ModalCobradores({ state, setState, setCobrador }) {
     if (search.length === 0) {
       return listaCobradores.slice(currentPage, currentPage + 5);
     }
-    const filtro = listaCobradores.filter(deudor => deudor.nombre.toUpperCase().includes(search));
+    const filtro = listaCobradores.filter(deudor => deudor.nombre.toUpperCase().includes(search.toUpperCase()));
     return filtro.slice( currentPage, currentPage + 5);
   }
 
   const nextPage = () => {
     if (
-      listaCobradores.filter((cobrador) => cobrador.nombre.toUpperCase().includes(search)).length >
+      listaCobradores.filter((cobrador) => cobrador.nombre.toUpperCase().includes(search.toUpperCase())).length >
       currentPage + 5
     )
     setCurrentPage(currentPage + 5);
@@ -29,9 +29,10 @@ export default function ModalCobradores({ state, setState, setCobrador }) {
 
   const onSearchChange = ({ target }) => {
     setSearch( target.value );
+    setCurrentPage(0);
   }
 
-  const APIURL = 'http://localhost:3800/api/cobradores'
+  const APIURL = 'https://paguaygo.herokuapp.com/api/cobradores'
   useEffect(() => {
     axios.get(APIURL).then(response => {
       setListaCobradores(response.data.cobrador)

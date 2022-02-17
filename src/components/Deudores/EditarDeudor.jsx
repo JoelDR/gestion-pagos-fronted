@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 export default function Formulario({toast}) {
-  const APIURL = 'http://localhost:3800/api/deudores/';
+  const APIURL = 'https://paguaygo.herokuapp.com/api/deudores/';
   const [deudor, setDeudor] = useState(null);
   let params = useParams();
   const navigate = useNavigate();

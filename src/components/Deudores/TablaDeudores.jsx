@@ -13,7 +13,7 @@ export default function TablaDeudores() {
   const [currentPage, setCurrentPage] = useState(0)
   const [search, setSearch] = useState('');
   const [deudorSelect, setDeudorSelect] = useState(null)
-  const APIURL = 'http://localhost:3800/api/deudores';
+  const APIURL = 'https://paguaygo.herokuapp.com/api/deudores';
   const [stateModal, setStateModal] = useState(true);
 
   const filtrarDeudores = () => {

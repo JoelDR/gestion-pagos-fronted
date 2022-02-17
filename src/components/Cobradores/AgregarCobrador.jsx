@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
 export default function AgregarDeudor({ toast }) {
-  const APIURL = 'http://localhost:3800/api/cobradores';
+  const APIURL = 'https://paguaygo.herokuapp.com/api/cobradores';
   const navigate = useNavigate();
   return(
     <div className="mt-10 sm:mt-0">

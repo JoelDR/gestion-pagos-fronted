@@ -14,7 +14,7 @@ export default function TablaCobradores() {
   const [search, setSearch ] = useState('');
   const [stateModal, setStateModal] = useState(true);
   const [cobradorSelect,setCobradorSelect] = useState(false);
-  const APIURL = 'http://localhost:3800/api/cobradores';
+  const APIURL = 'https://paguaygo.herokuapp.com/api/cobradores';
 
   const filtrarcobradores = () => {
     if (search.length === 0) {

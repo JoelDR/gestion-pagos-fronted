@@ -11,13 +11,13 @@ export default function ModalDeudores({ state, setState, setDeudor }) {
     if (search.length === 0) {
       return listaDeudores.slice(currentPage, currentPage + 5);
     }
-    const filtro = listaDeudores.filter(deudor => deudor.nombre.toUpperCase().includes(search));
+    const filtro = listaDeudores.filter(deudor => deudor.nombre.toUpperCase().includes(search.toUpperCase()));
     return filtro.slice( currentPage, currentPage + 5);
   }
 
   const nextPage = () => {
     if (
-      listaDeudores.filter((deudor) => deudor.nombre.toUpperCase().includes(search)).length >
+      listaDeudores.filter((deudor) => deudor.nombre.toUpperCase().includes(search.toUpperCase())).length >
       currentPage + 5
     )
     setCurrentPage(currentPage + 5);
@@ -29,9 +29,10 @@ export default function ModalDeudores({ state, setState, setDeudor }) {
 
   const onSearchChange = ({ target }) => {
     setSearch( target.value );
+    setCurrentPage(0);
   }
 
-  const APIURL = 'http://localhost:3800/api/deudores'
+  const APIURL = 'https://paguaygo.herokuapp.com/api/deudores'
   useEffect(() => {
     axios.get(APIURL).then(response => {
       setListaDeudores(response.data.deudores)

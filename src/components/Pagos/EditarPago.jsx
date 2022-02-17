@@ -6,7 +6,7 @@ import ModalDeudores from "./Modal/ModalDeudores";
 import ModalCobradores from "./Modal/ModalCobradores";
 
 export default function AgregarPago() {
-  const APIURL = "http://localhost:3800/api/";
+  const APIURL = "https://paguaygo.herokuapp.com/api/";
   const [pago, setPago] = useState(null)
   const [showModalDeudores, setShowModalDeudores] = useState(false);
   const [showModalCobradores, setShowModalCobradores] = useState(false);

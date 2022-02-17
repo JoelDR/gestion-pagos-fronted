@@ -6,7 +6,7 @@ import ModalDeudores from "./Modal/ModalDeudores";
 import ModalCobradores from "./Modal/ModalCobradores";
 
 export default function AgregarPago({ toast }) {
-  const APIURL = "http://localhost:3800/api/";
+  const APIURL = "https://paguaygo.herokuapp.com/api/";
   const [showModalDeudores, setShowModalDeudores] = useState(false);
   const [showModalCobradores, setShowModalCobradores] = useState(false);
   const [cobradorSelect, setCobradorSelect] = useState(null);
@@ -66,7 +66,7 @@ export default function AgregarPago({ toast }) {
             })
             .then((res) => {
               resetForm();
-              toast('Deudor guardado con éxito')
+              toast('¡Pago guardado con éxito!')
               navigate('/menu/pagos/lista');
             });
         }}
