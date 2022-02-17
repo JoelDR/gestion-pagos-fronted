@@ -4,11 +4,25 @@ import {useAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
 import './Dashboard.css'
 
-const tableHead = ['Deudor','Cobrador', 'Fecha', 'Total'];
+const tableHead = [
+  {
+    id: 1,
+    name: 'Deudor'
+  },
+  {
+    id: 2,
+    name: 'Cobrador'
+  }, 
+  {
+    id: 3,
+    name: 'Fecha'
+  }, 
+  {
+    id: 4,
+    name: 'Total'
+  }
+];
 
-const generateKey = (pre) => {
-  return `${ pre }_${ new Date().getTime() }`;
-};
 const getDateNow = ()=> {
   let date = new Date();
   return date.getFullYear() + '-0' + (date.getMonth()+1) + '-' + date.getDate()
@@ -58,7 +72,7 @@ export default function Dashboard() {
           <img 
             src={user.picture} 
             alt={user.name} 
-            className='rounded-full mx-auto my-4'
+            className='rounded-full mx-auto my-4 h-40'
           />
           <p className='text-center font-semibold'>{user.name}</p>
           <label className='font-semibold text-center text-base text-indigo-600 my-2'>Información</label>
@@ -75,15 +89,15 @@ export default function Dashboard() {
               <thead className='bg-gray-50'>
                 <tr>{tableHead.map(head => 
                   <th 
-                    className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider' key={generateKey(head)}
-                  >{head}</th>
+                    className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider' key={head.id}
+                  >{head.name}</th>
                 )}
                 </tr>
               </thead>
               <tbody>
               {
                 todayPayments.length > 0 ? filterPayments().map(payment => (
-                  <tr>
+                  <tr key={payment._id}>
                     <td className='px-6 py-4 whitespace-nowrap'>
                       {payment.deudors[0].nombre}
                     </td>

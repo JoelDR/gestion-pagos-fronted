@@ -15,7 +15,6 @@ export default function AgregarDeudor({ toast }) {
           nombre: "",
           correo: "",
           telefono: "",
-          sexo: ""
         }}
         validate={(valores) => {
           let errores = {};
@@ -39,10 +38,6 @@ export default function AgregarDeudor({ toast }) {
             )
           ) {
             errores.correo = "El correo ingresado no es válido";
-          }
-
-          if(!valores.sexo) {
-            errores.sexo = "Seleccione una opción";
           }
 
           if (!valores.telefono) {
@@ -164,20 +159,6 @@ export default function AgregarDeudor({ toast }) {
                       />
                       {touched.telefono && errors.telefono && (
                         <div className="text-rose-500">{errors.telefono}</div>
-                      )}
-                    </div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">Sexo</label>
-                    <div role="group" aria-labelledby="my-radio-group">
-                      <label className="mr-4">
-                        <Field type="radio" name="sexo" value="Masculino" className="w-4 h-4 mr-1 text-indigo-600 bg-indigo-600 focus:outline-none"/>
-                        Masculino
-                      </label>
-                      <label>
-                        <Field type="radio" name="sexo" value="Femenino" className="w-4 h-4 border-gray-300 focus:outline-none indeterminate:bg-indigo-600"/>
-                        Femenino
-                      </label>
-                      {touched.sexo && errors.sexo && (
-                        <div className="text-rose-500">{errors.sexo}</div>
                       )}
                     </div>
                   </div>

@@ -63,18 +63,17 @@ export default function AgregarPago() {
               return errores;
             }}
             onSubmit={(values, { resetForm }) => {
-              // axios
-              //   .post(`${APIURL}pagos`, {
-              //     deudor: values.deudor,
-              //     cobrador: values.cobrador,
-              //     total: values.total,
-              //     fecha: values.fecha.toISOString().substring(0,10),
-              //   })
-              //   .then((res) => {
-              //     navigate('/menu/pagos/lista')
-              //     resetForm();
-              //   });
-              console.log(values);
+              axios
+                .post(`${APIURL}pagos`, {
+                  deudor: values.deudor,
+                  cobrador: values.cobrador,
+                  total: values.total,
+                  fecha: values.fecha.toISOString().substring(0,10),
+                })
+                .then((res) => {
+                  navigate('/menu/pagos/lista')
+                  resetForm();
+                });
             }}
           >
             {({ errors, touched, values }) => (

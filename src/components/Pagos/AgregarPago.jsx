@@ -13,6 +13,11 @@ export default function AgregarPago({ toast }) {
   const [deudorSelect, setDeudorSelect] = useState(null);
   const navigate = useNavigate();
 
+  const getDateCurrently = () => {
+    let date = new Date();
+    return date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+  }
+
   return (
     <div className="mt-10 sm:mt-0">
       <Formik
@@ -25,7 +30,7 @@ export default function AgregarPago({ toast }) {
         }}
         validate={(valores) => {
           let errores = {};
-          let currentDate = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
+          let currentDate = new Date(getDateCurrently()).toISOString().split('T')[0];
 
           if (!valores.deudor) {
             errores.deudor = "Ingrese un deudor";
@@ -37,8 +42,8 @@ export default function AgregarPago({ toast }) {
 
           if (valores.fecha === "") {
             errores.fecha = "Ingrese una fecha";
-          } else if (valores.fecha < currentDate) {
-            errores.fecha = "Ingrese una fecha mayor a la actual";
+          } else if (valores.fecha < currentDate  || valores.fecha > currentDate) {
+            errores.fecha = "Seleccione la fecha actual";
           }
 
           if (!valores.total) {
@@ -59,10 +64,11 @@ export default function AgregarPago({ toast }) {
               total: values.total,
               fecha: values.fecha,
             })
-            .then((res) => console.log(res));
-          resetForm();
-          toast('Deudor guardado con éxito')
-          navigate('/menu/pagos/lista');
+            .then((res) => {
+              resetForm();
+              toast('Deudor guardado con éxito')
+              navigate('/menu/pagos/lista');
+            });
         }}
       >
         {({ errors, touched, values }) => (

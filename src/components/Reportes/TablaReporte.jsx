@@ -19,11 +19,11 @@ export default function TablaReportes() {
 
   const filtrarReportes = () => {
     if (search.length === 0) {
-      return reportes;
+      return reportes.slice(0, 7);
     }
     const filtro = reportes.filter(reporte => reporte.deudors[0].nombre.toUpperCase().includes(search.toUpperCase()) || 
     reporte.cobradors[0].nombre.toUpperCase().includes(search.toUpperCase()));
-    return filtro;
+    return filtro.slice(0, 7);
   }
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function TablaReportes() {
   },[APIURL]);
   
   return (
-    <div className="overscroll-none flex flex-auto  grid grid-cols-12 gap-5">
+    <div className="flex flex-auto  grid grid-cols-12 gap-5">
       <div className="col-span-5 shadow-md bg-white rounded-lg">
         <div className=" align-middle inline-block min-w-full sm:px-6 lg:px-5 py-2">
           <section className='flex justify-between p-4'>

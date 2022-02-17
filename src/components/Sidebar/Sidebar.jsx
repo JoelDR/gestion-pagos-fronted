@@ -8,7 +8,7 @@ export default function Sidebar() {
   const { logout, user } = useAuth0();
   const inactiveNavLink = 'py-3 pl-7 hover:bg-rose-500 text-white text-left ml-7 rounded-l-full focus:bg-rose-500';
   const activeNavLink = 'py-3 pl-7 text-white text-left ml-7 rounded-l-full bg-rose-500';
-  console.log(user);
+
   return(
     <div className='grid grid-cols-12 h-screen'>
       <div className='bg-[#313559] col-span-2 flex flex-col content-center'>
