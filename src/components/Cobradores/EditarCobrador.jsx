@@ -51,10 +51,11 @@ export default function AgregarDeudor({toast}) {
               nombre: values.nombre,
               direccion: values.direccion,
               servicio: values.servicio,
+            }).then(res => {
+              resetForm();
+              toast('Cobrador guardado con éxito');
+              navigate('/menu/cobradores/lista');
             });
-            resetForm();
-            toast('Cobrador guardado con éxito');
-            navigate('/menu/cobradores/lista');
           }}
         >
           {({ errors, touched }) => (
