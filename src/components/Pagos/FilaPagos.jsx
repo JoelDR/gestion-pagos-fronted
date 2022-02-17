@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+
 export default function FilaPagos({ data, setStateModal, setPago }) {
-  let { _id, deudors, cobradors, total, fecha } = data;
+  let { deudors, cobradors, total, fecha } = data;
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap">

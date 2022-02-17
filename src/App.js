@@ -16,7 +16,6 @@ import TablaReportes from './components/Reportes/TablaReporte';
 import AgregarPago from './components/Pagos/AgregarPago';
 import { useAuth0 } from "@auth0/auth0-react";
 import toast, { Toaster } from 'react-hot-toast';
-import EditarPago from './components/Pagos/EditarPago';
 
 const notify = (message) => toast.success(message, {
   position: "top-center",
@@ -44,7 +43,6 @@ function App() {
               <Route exact path="/menu/pagos" element={ !isAuthenticated? <Navigate to="/" /> : <PageComponents/>}>
                   <Route exact path="/menu/pagos/lista" element={<TablaPagos/>}></Route>
                   <Route exact path="/menu/pagos/nuevo" element={<AgregarPago toast={notify}/>}></Route>
-                  <Route exact path="/menu/pagos/editar/:id" element={<EditarPago toast={notify}/>}></Route>
               </Route>
               <Route exact path="/menu/reportes" element={!isAuthenticated? <Navigate to="/" /> : <PageComponents/>}>
                   <Route exact path="/menu/reportes/lista" element={<TablaReportes/>}></Route>
